@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Layout} from 'antd';
 
-function App() {
+import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
+import Headerindex from './page/Header';
+import Products from './page/Products';
+import Footers from './page/Footer';
+
+
+import  CartProvider from './context/cartContext';
+
+export default function App()  {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CartProvider>
+        <Router>
+           <div className="App">
+           <Layout className="layout">
+               <Headerindex />
+                <Switch>
+                  <Route path="/cart">  
+                    <Home />
+                  </Route>
+                  <Route path="/products">
+                    <About />
+                  </Route>
+                  <Route path="/">
+                    <Products />
+                  </Route>
+                </Switch>
+                <Footers />
+            </Layout>
+          </div>
+      </Router>
+    </CartProvider>
   );
 }
 
-export default App;
+function About() {
+  return <h2>About</h2>;
+}
+function Home() {
+  return <h2>Users</h2>;
+}

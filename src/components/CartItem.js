@@ -4,16 +4,15 @@ import React , {Component} from 'react';
 import { cartContext } from '../context/cartContext';
 
 import 'antd/dist/antd.css';
-import './style/Products.css';
 import { Card } from 'antd';
-import { EditOutlined, ShoppingCartOutlined, HeartTwoTone } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, HeartTwoTone } from '@ant-design/icons';
 const { Meta } = Card;
 
-class Product extends Component {
+class CartItem extends Component {
     render(){
         let { products } = this.props;
         return (
-                <div className="Product">
+                <div className="CartItem">
                     {
                         <Card
                             
@@ -29,8 +28,8 @@ class Product extends Component {
                                 <EditOutlined key="edit" />,
                                     <cartContext.Consumer>
                                         {
-                                            ({addItem}) => (
-                                                <ShoppingCartOutlined onClick={() => addItem(products)} />
+                                            ({removeItem}) => (
+                                                <DeleteOutlined onClick={() => removeItem(products)} />
                                             )
                                         }
                                     </cartContext.Consumer>
@@ -50,4 +49,4 @@ class Product extends Component {
         );
     }
 }
-export default Product;
+export default CartItem;
